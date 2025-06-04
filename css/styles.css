@@ -1,0 +1,104 @@
+:root {
+  --leve: #28a745;
+  --moderado: #ffc107;
+  --urgente: #fd7e14;
+  --critico: #dc3545;
+}
+
+/* Estilos de autenticación */
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.toggle-password {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.toggle-password:hover {
+  background-color: #e9ecef;
+}
+
+/* Estilos de la aplicación */
+#app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  padding: 0.75rem 1rem;
+}
+
+/* Estilos para pacientes */
+.triaje-leve {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-left: 4px solid var(--leve);
+}
+
+.triaje-moderado {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-left: 4px solid var(--moderado);
+}
+
+.triaje-urgente {
+  background-color: rgba(253, 126, 20, 0.1);
+  border-left: 4px solid var(--urgente);
+}
+
+.triaje-critico {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-left: 4px solid var(--critico);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+/* Badges de gravedad */
+.badge-leve {
+  background-color: var(--leve);
+  color: white;
+}
+
+.badge-moderado {
+  background-color: var(--moderado);
+  color: #000;
+}
+
+.badge-urgente {
+  background-color: var(--urgente);
+  color: white;
+}
+
+.badge-critico {
+  background-color: var(--critico);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #patient-table td:nth-child(3),
+  #patient-table td:nth-child(4),
+  #patient-table th:nth-child(3),
+  #patient-table th:nth-child(4) {
+    display: none;
+  }
+}
+
+/* Estilos para toast */
+.toast-success {
+  background-color: #d1e7dd;
+}
+
+.toast-error {
+  background-color: #f8d7da;
+}
+
+.toast-info {
+  background-color: #cfe2ff;
+}
