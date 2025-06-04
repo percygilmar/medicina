@@ -59,6 +59,11 @@ function setupEventListeners() {
 
   // Pacientes
   patientForm.addEventListener('submit', handlePatientSubmit);
+
+  // Validación de contraseña en tiempo real
+  document.getElementById('register-password').addEventListener('input', function() {
+    validatePasswordFeedback(this.value);
+  });
 }
 
 // Autenticación
@@ -93,8 +98,9 @@ function handleRegister(e) {
     return;
   }
 
-  if (password.length < 6) {
-    showToast('La contraseña debe tener al menos 6 caracteres', 'danger');
+  // Validar complejidad de la contraseña
+  if (!validatePassword(password)) {
+    showToast('La contraseña debe tener al menos 8 caracteres, una mayúscula y una minúscula', 'danger');
     return;
   }
 
@@ -121,6 +127,29 @@ function handleLogout() {
   currentUser = null;
   showAuth();
   showToast('Sesión cerrada correctamente', 'info');
+}
+
+// Validación de contraseña
+function validatePassword(password) {
+  // Al menos 8 caracteres, una mayúscula y una minúscula
+  const regex = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  return regex.test(password);
+}
+
+// Feedback visual para la contraseña
+function validatePasswordFeedback(password) {
+  const feedbackElement = document.getElementById('register-password').nextElementSibling.nextElementSibling;
+  
+  if (password.length === 0) {
+    feedbackElement.className = 'form-text text-muted';
+    feedbackElement.textContent = 'La contraseña debe tener al menos 8 caracteres, una mayúscula y una minúscula';
+  } else if (!validatePassword(password)) {
+    feedbackElement.className = 'form-text text-danger';
+    feedbackElement.textContent = 'No cumple los requisitos';
+  } else {
+    feedbackElement.className = 'form-text text-success';
+    feedbackElement.textContent = 'Contraseña válida';
+  }
 }
 
 // Pacientes
